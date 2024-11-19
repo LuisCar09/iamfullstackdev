@@ -6,8 +6,10 @@ import ItemDetailPage from "./ItemDetailPage.jsx";
 
 const App = () => {
   const [data, setData] = useState(null)
-  const urlApi = 'http://localhost:3000'
-
+  const urlApi = 'http://localhost:8080'
+  const [searchData,setSearchData] = useState(false)
+  console.log(searchData);
+  
 const fetchData = async () => {
   try {
     const response = await fetch(urlApi)
@@ -20,7 +22,7 @@ const fetchData = async () => {
 
 useEffect(() => {
   fetchData()
-}, [])
+}, [searchData])
 
   return (
     <Router>
@@ -33,7 +35,7 @@ useEffect(() => {
         ? (<div>cargando...</div>) 
         : 
           <Routes>
-            <Route path="/" element={<Home data={data} />} />
+            <Route path="/" element={<Home data={data} reloadDataFunction = {setSearchData} />} />
            
             {data.map(item => (
               <Route key={item._id} path={`/${item._id}`} element={<ItemDetailPage item={item}/>} />

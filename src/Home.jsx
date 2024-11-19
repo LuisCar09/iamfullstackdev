@@ -1,8 +1,11 @@
 import {Link} from 'react-router-dom'
-const Home = ({data}) => {
+import InputCreate from "./InputCreate.jsx";
+const Home = ({data,reloadDataFunction}) => {
+  
   return (
     <>
     <h2>Lista de datos</h2>
+    <InputCreate needToReload = {reloadDataFunction} />
     <ul>
       {data.map(item => (
         <li key={item._id}>
